@@ -25,7 +25,7 @@ func acceptConns(ln net.Listener, conns chan net.Conn) {
 	// Continuously accept a network connection from the Listener
 	// and add it to the channel for handling connections.
 	for {
-		conn, err := ln.Accept() //accept waits for clients to Dial/blocks
+		conn, err := ln.Accept() //accept waits for clients to Dial/block
 		if err != nil {
 			handleError()
 		}
@@ -91,7 +91,7 @@ func main() {
 			// Send the message to all clients that aren't the sender
 			for k, v := range clients {
 				if k != msg.sender {
-					fmt.Fprintln(v, msg.message)
+					fmt.Fprint(v, msg.message)
 				}
 			}
 		}

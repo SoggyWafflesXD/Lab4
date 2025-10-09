@@ -18,7 +18,7 @@ func read(conn net.Conn) {
 			fmt.Println("Server is down!")
 			return
 		}
-		fmt.Printf("Received: " + msg)
+		fmt.Print("Received: " + msg)
 	}
 }
 
@@ -31,8 +31,9 @@ func write(conn net.Conn) {
 		if err != nil {
 			fmt.Println("Error reading input")
 			return
+		} else {
+			fmt.Fprint(conn, msg)
 		}
-		fmt.Fprintln(conn, msg)
 	}
 }
 
@@ -47,7 +48,7 @@ func main() {
 		return
 	}
 
-	fmt.Println("Connected to server at", *addrPtr)
+	fmt.Println("Connected to server at ", *addrPtr)
 
 	//TODO Start asynchronously reading and displaying messages
 	go read(conn)
